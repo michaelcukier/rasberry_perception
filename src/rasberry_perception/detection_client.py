@@ -232,7 +232,16 @@ class RunClientOnTopic:
         zp = depth_roi[valid_positions] / 1000.0
         yp = ((valid_positions[0] + y_offset) - _cy) * zp / _fy
         xp = ((valid_positions[1] + x_offset) - _cx) * zp / _fx
-        ret = Pose(position=Point(np.median(xp), np.median(yp), np.median(zp)), orientation=Quaternion(0, 0, 0, 1))
+        try:
+            zp_chunk = [zp[i:i + int(len(zp)/20)] for i in range(0, len(zp), int(len(zp)/20))] 
+            zp_medians = []
+            for i in zp_chunk:
+                zp_medians.append(np.median(i))    
+            zp_medians = np.sort(zp_medians[::-1])  
+            zp_medians = zp_medians[len(zp_medians)//4:]
+            ret = Pose(position=Point(np.median(xp), np.median(yp), np.mean(zp_medians)), orientation=Quaternion(0, 0, 0, 1))
+        except:
+            ret = Pose(position=Point(np.median(xp), np.median(yp), np.median(zp)), orientation=Quaternion(0, 0, 0, 1))
         if return_size:
             ret = (ret, RunClientOnTopic._get_size(xp, yp, zp))
         return ret
