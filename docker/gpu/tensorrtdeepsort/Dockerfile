@@ -11,9 +11,9 @@
 ## Tag with:
 ##   docker tag repository.sagarobotics.com/tensorrt_yolov4deepsort.gpu:local repository.sagarobotics.com/tensorrt_yolov4deepsort.gpu:$(git show --format="%h" -s)
 
-FROM nvcr.io/nvidia/tensorrt:20.09-py3
+FROM nvcr.io/nvidia/tensorrt:20.11-py3
 
-LABEL cuda.version="11.0" cudnn.version="8.0" tensorrt.version="7.1.3" maintainers="Robert Belshaw <rbelshaw@sagarobotics.com>, Nikos Tsagkopoulos <ntsagkopoulos@sagarobotics.com>"
+LABEL cuda.version="11.1" cudnn.version="8.0" tensorrt.version="7.2.1" maintainers="Robert Belshaw <rbelshaw@sagarobotics.com>, Nikos Tsagkopoulos <ntsagkopoulos@sagarobotics.com>"
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update --no-install-recommends && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y ninja-build protobuf-compiler libprotobuf-dev python  python3-venv
@@ -35,7 +35,7 @@ WORKDIR /
 RUN python3.6 -m venv modularmot_venv --clear --system-site-packages && \
     . modularmot_venv/bin/activate && \
     pip install --no-cache-dir rospkg && \
-    dpkg -i /opt/tensorrt/python/*-tf_*.deb && \
+    . /opt/tensorrt/python/python_setup.sh && \
     pip install --no-cache-dir numpy && \
     pip install --no-cache-dir cython && \
     pip install --no-cache-dir cython-bbox && \
@@ -76,7 +76,7 @@ ENV PATH=/usr/local/cuda/bin${PATH:+:${PATH}}
 ENV LD_LIBRARY_PATH=/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 
 WORKDIR /
-RUN . modularmot_venv/bin/activate && /PerceptionApps/ModularMOT/modularmot/build_engine.py "/config.json"
+#RUN . modularmot_venv/bin/activate && /PerceptionApps/ModularMOT/modularmot/build_engine.py "/config.json"
 
 # Docker clean-up
 RUN rm -rf /var/lib/apt/lists/*
