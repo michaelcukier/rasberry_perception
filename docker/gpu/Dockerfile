@@ -18,10 +18,10 @@
 ## Tag with:
 ##   docker tag repository.sagarobotics.com/base.gpu:local repository.sagarobotics.com/base.gpu:$(git show --format="%h" -s)
 
-FROM nvidia/cuda:10.2-cudnn7-devel-ubuntu18.04
+FROM nvidia/cuda:11.1.1-cudnn8-runtime-ubuntu18.04
 
 ## Meta information
-LABEL cuda.version="10.2" maintainers="Saul Goldblatt <saul.goldblatt@sagarobotics.com>, Nikos Tsagkopoulos <ntsagkopoulos@sagarobotics.com>"
+LABEL cuda.version="11.1" maintainers="Saul Goldblatt <saul.goldblatt@sagarobotics.com>, Nikos Tsagkopoulos <ntsagkopoulos@sagarobotics.com>"
 
 ## Install ROS
 ENV ROS_DISTRO melodic
@@ -36,7 +36,8 @@ RUN rm /etc/apt/sources.list.d/* && \
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \
     DEBIAN_FRONTEND=noninteractive apt update
 RUN DEBIAN_FRONTEND=noninteractive apt install -y ros-${ROS_DISTRO}-catkin --no-install-recommends && \
-    DEBIAN_FRONTEND=noninteractive apt install -y ros-${ROS_DISTRO}-ros-base python-catkin-tools python3-venv python3-pip --no-install-recommends && \
+    DEBIAN_FRONTEND=noninteractive apt install -y ros-${ROS_DISTRO}-ros-base python-catkin-tools python3-venv python3-pip --no-install-recommends && \ 
+    DEBIAN_FRONTEND=noninteractive apt install -y build-essential && \
     DEBIAN_FRONTEND=noninteractive apt install -y python-rosdep --no-install-recommends && rosdep init && rosdep update
 
 ## Clone necessary repositories
