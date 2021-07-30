@@ -4,7 +4,7 @@ version: '2.4'
 services:
     gripper_perception:
         # Need to docker login
-        image: repository.sagarobotics.com/detectron2.${DEVICE}:deploy
+        image: repository.sagarobotics.com/detectron2.${DEVICE}:cuda11_1
         container_name: detectron2_backend
         pull_policy: always
         network_mode: host
@@ -23,7 +23,7 @@ services:
 #        - ../../rasberry_perception:/catkin_ws/src/rasberry_perception
 
     robot_perception:
-        image: repository.sagarobotics.com/tensorrt_yolov4deepsort.${DEVICE}:deploy
+        image: repository.sagarobotics.com/tensorrt_yolov4deepsort.${DEVICE}:cuda11_1
         container_name: tensorrtdeepsort
         network_mode: host
         environment:
