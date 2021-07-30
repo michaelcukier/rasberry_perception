@@ -11,7 +11,7 @@ roslaunch rasberry_perception detector_client.launch service_name:=<SERVICE NAME
 ./scripts/run_backend.sh <SERVICE NAME>
 ```
 
-`<SERVICE NAME>` is one of the service you want to run inside [here](src/rasberry_perception/docker/docker-compose.yml).
+`<SERVICE NAME>` is one of the service you want to run inside [here](/docker/docker-compose.yml).
 
 ## Installation
 
