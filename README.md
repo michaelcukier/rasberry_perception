@@ -7,8 +7,11 @@ The rasberry_perception package aims to interleave ROS and deep learning framewo
 ## Quick start
 
 ```bash
-roslaunch rasberry_perception detector.launch backend:="detectron2" password:="obtain_from_raymond" image_ns:="/your_camera/colour" depth_ns:="/your_camera/depth" score:="0.5"
+roslaunch rasberry_perception detector_client.launch service_name:=<SERVICE NAME> image_ns:=/usb_cam show_vis:=true show_pub:=true
+./scripts/run_backend.sh <SERVICE NAME>
 ```
+
+`<SERVICE NAME>` is one of the service you want to run inside [here](src/rasberry_perception/docker/docker-compose.yml).
 
 ## Installation
 
@@ -16,8 +19,8 @@ roslaunch rasberry_perception detector.launch backend:="detectron2" password:="o
 
 ```bash
 cd catkin_ws/src
-git clone https://github.com/RaymondKirk/rasberry_perception
-catkin build rasberry_perception
+git clone https://github.com/SAGARobotics/rasberry_perception
+catkin_make
 ```
 
 ## Detection Backends
