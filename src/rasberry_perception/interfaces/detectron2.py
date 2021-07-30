@@ -34,7 +34,7 @@ def add_dataset_category_config(cfg):
 
 @DETECTION_REGISTRY.register_detection_backend("detectron2")
 class Detectron2Server(BaseDetectionServer):
-    _supported_version = "0.4"
+    _supported_version = "0.5"
 
     def __init__(self, config_file, service_name, model_file=None):
         try:
