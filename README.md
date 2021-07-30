@@ -92,6 +92,7 @@ Based off [this](https://docs.google.com/presentation/d/1UDsfChvRGO-f4m43OagRsdk
 
 ## Testing Strategies
 ### Basic Testing Strategy
+[Test sheet](https://docs.google.com/spreadsheets/d/1C4xXYK323IoLDwfvh_UY2o3VphsdprK5LJdtdRo7tU4/edit?usp=sharing)
 1. Run gripper_perception and robot_perception simultaneously on [rosbag](https://drive.google.com/file/d/1Hou6I4-i5ziNpsMPYu96Gs7I6dXLnDGk/view?usp=sharing)
    * Note FPS
     * Turn off gripper_perception and note FPS
